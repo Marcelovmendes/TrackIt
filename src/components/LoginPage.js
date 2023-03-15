@@ -31,7 +31,7 @@ export default LoginPage;
 const LogoPage = styled.div``;
 const ContainerLoginPage = styled.div`
   margin-top: 68px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
