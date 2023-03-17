@@ -1,26 +1,99 @@
+import { useState } from "react";
 import styled from "styled-components";
 import LogoImg from "../Assets/Group 8.png";
+import { fetchLoginList, fetchResgisterList, fetchRestisterList } from "../services";
 const LoginPage = () => {
+  const [order, setOrder] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassWord] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [img, setImg] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+
+  const enterLogin = () => {
+    const body = {
+      Useremail: email,
+      Userpassword: password,
+    };
+    fetchLoginList(body)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.response.data));
+  };
+  const enterRegister = () => {
+    const body = {
+      email: registerEmail,
+      name: userName,
+      UserImg: img,
+      password: registerPassword,
+    };
+    fetchResgisterList(body)
+    .then((res) =>console.log(res.data)) 
+    .catch((err)=>console.log(err.response.data))
+  };
+
   return (
     <ContainerLoginPage>
       <LogoPage>
         <img src={LogoImg} alt="imgLogin" />
       </LogoPage>
       <FormLogin>
-        <form>
-          <input required type="email" placeholder="email" />
-          <input required type="password" placeholder="senha" />
+        <form onSubmit={enterLogin}>
+          <input
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="email"
+            autoComplete="off"
+          />
+          <input
+            required
+            value={password}
+            onChange={(e) => setPassWord(e.target.value)}
+            type="password"
+            placeholder="senha"
+            autoComplete="off"
+          />
           <button type="submit">Entrar</button>
         </form>
       </FormLogin>
       <FormRegister>
-      <form>
-      <input required type="email" placeholder="email" />
-        <input required type="password" placeholder="senha" />
-        <input required type="text" placeholder="nome" />
-        <input required type="url" placeholder="imagem" />
-        <button type="submit">Cadastrar</button>
-      </form>
+        <form onSubmit={enterRegister}>
+          <input
+            required
+            onChange={(e) => setRegisterEmail(e.target.value)}
+            value={registerEmail}
+            autoComplete="off"
+            type="email"
+            placeholder="email"
+          />
+          <input
+            required
+            onChange={(e) => setRegisterPassword(e.target.value)}
+            value={registerPassword}
+            autoComplete="off"
+            type="password"
+            placeholder="senha"
+          />
+          <input
+            required
+            onChange={(e) => setUserName(e.target.value)}
+            value={userName}
+            autoComplete="off"
+            type="text"
+            placeholder="nome"
+          />
+          <input
+            required
+            onChange={(e) => setImg(e.target.value)}
+            value={img}
+            autoComplete="off"
+            type="url"
+            placeholder="imagem"
+          />
+          <button type="submit">Cadastrar</button>
+        </form>
       </FormRegister>
       <div></div>
     </ContainerLoginPage>
@@ -31,7 +104,7 @@ export default LoginPage;
 const LogoPage = styled.div``;
 const ContainerLoginPage = styled.div`
   margin-top: 68px;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -70,7 +143,7 @@ const FormLogin = styled.div`
   }
 `;
 const FormRegister = styled.div`
- margin-left: 36px;
+  margin-left: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,4 +172,5 @@ const FormRegister = styled.div`
     border-radius: 4.63px;
     border-color: #52b6ff;
     box-shadow: none;
-  }`;
+  }
+`;
