@@ -1,15 +1,27 @@
 import axios from "axios";
 
-export const fetchLoginList = () => {
+export const fetchLoginList = (email, password) => {
+
+  const data = {
+    email: email,
+    password:password,
+
+  }
   const url =
     "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
-  return axios.post(url);
+  return axios.post(url,data);
 };
 
-export const fetchResgisterList = () => {
+export const fetchResgisterList = (registerEmail,img,userName,registerPassword) => {
+  const data = {
+    email:registerEmail, 
+    name: userName,
+    image: img,
+    password:registerPassword,
+  }
   const url =
     "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
-  return axios.post(url);
+  return axios.post(url,data);
 };
 
 export const fetchCreateHabits = () => {

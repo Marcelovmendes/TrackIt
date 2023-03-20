@@ -2,12 +2,19 @@ import styled from "styled-components";
 import TrackItLogo from "../Assets/TrackIt.png";
 import ImgProfile from "../Assets/Rectangle 14.png";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate()
+  
+  const onclickLogoHome = ()=> {
+  navigate("/hoje")
+  }
+
   return (
     <>
-      <NavBar>
-        <NavImgLogo>
+      <NavBar >
+        <NavImgLogo onClick={onclickLogoHome}>
           <img src={TrackItLogo} alt="" />
         </NavImgLogo>
         <NavImgProfile>
